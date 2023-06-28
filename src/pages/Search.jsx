@@ -1,11 +1,14 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {  searchMovie, searchText } from '../Redux/action';
+import { useLocation, useSearchParams } from 'react-router-dom';
 
 const Search = () => {
   const searchmovie = useSelector((state)=> state.movie)
   const dispatch = useDispatch();
-  const text=useSelector((state)=> state.text)
+  const text=useSelector((state)=> state.text);
+  const [searchparams]= useSearchParams();
+  const location = useLocation();
   console.log(text);
   //  const handleReset=()=>{
        
@@ -16,7 +19,10 @@ const Search = () => {
     }
    const handleSearch=(e)=>{
          e.preventDefault();
-         dispatch(searchMovie(text))
+         const params={
+          type :"movie",
+         }
+         dispatch(searchMovie(text, params))
     }
   return (
     <div>

@@ -38,9 +38,14 @@ const searchText=(text)=>(dispatch)=>{
     });
 }
 
-const searchMovie=(text)=> (dispatch)=>{
+const searchMovie=(text,params)=> (dispatch)=>{
     dispatch({type:types.SEARCH_JOB_REQUEST}) 
-return axios.get(`https://mocki.io/v1/a41f3039-4c21-42bb-a886-d9a342a02ae9?s=${text}`)
+return axios.get("https://mocki.io/v1/a41f3039-4c21-42bb-a886-d9a342a02ae9",{
+    params:{
+        s:text,
+        ...params
+    }
+})
     .then((r)=>{
         dispatch({type:types.SEARCH_JOB_SUCCESS, payload:r.data})
     })
